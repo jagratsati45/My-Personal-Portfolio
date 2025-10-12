@@ -1,5 +1,79 @@
+// --- NEW: tsParticles Initialization ---
+document.addEventListener('DOMContentLoaded', () => {
+    tsParticles.load("particles-js", {
+        background: {
+            color: {
+                value: "#1a1d26" // Match your dark mode bg or a dark color
+            }
+        },
+        fpsLimit: 60,
+        interactivity: {
+            events: {
+                onHover: {
+                    enable: true,
+                    mode: "repulse"
+                },
+                onClick: {
+                    enable: true,
+                    mode: "push"
+                },
+                resize: true
+            },
+            modes: {
+                repulse: {
+                    distance: 100,
+                    duration: 0.4
+                },
+                push: {
+                    quantity: 4
+                }
+            }
+        },
+        particles: {
+            color: {
+                value: "#ffffff"
+            },
+            links: {
+                color: "#ffffff",
+                distance: 150,
+                enable: true,
+                opacity: 0.2,
+                width: 1
+            },
+            collisions: {
+                enable: true
+            },
+            move: {
+                direction: "none",
+                enable: true,
+                outModes: {
+                    default: "bounce"
+                },
+                random: false,
+                speed: 1,
+                straight: false
+            },
+            number: {
+                density: {
+                    enable: true,
+                    area: 800
+                },
+                value: 80
+            },
+            opacity: {
+                value: 0.2
+            },
+            shape: {
+                type: "circle"
+            },
+            size: {
+                value: { min: 1, max: 5 },
+            }
+        },
+        detectRetina: true
+    });
+});
 AOS.init();
-
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Mobile Hamburger Menu ---
@@ -9,6 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', () => {
             navMenu.classList.toggle('is-active');
+            document.body.classList.toggle('menu-open'); // <-- THIS LINE IS THE KEY CHANGE
+
             // Change hamburger icon to close icon (X) and back
             const icon = hamburger.querySelector('i');
             if (icon.classList.contains('fa-bars')) {
@@ -24,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('is-active');
+                document.body.classList.remove('menu-open'); // <-- ALSO CLOSE OVERLAY HERE
                 hamburger.querySelector('i').classList.remove('fa-times');
                 hamburger.querySelector('i').classList.add('fa-bars');
             });
