@@ -4,34 +4,60 @@ class JagratChatbot {
         this.speechEnabled = true;
         this.selectedVoice = null;
         this.rules = [
-            // --- Existing Rules ---
+            // --- Enhanced Rules with Actions ---
             {
                 keywords: ["name", "your name", "what is your name", "who are you", "tell me your name", "name please"],
-                answer: "I'm Jagrat Sati’s virtual assistant, here to help you!"
+                answer: "I'm Jagrat Sati’s virtual assistant, here to help you explore his portfolio!"
             },
             {
-                keywords: ["skills", "what can you do", "your skills", "what are your skills", "know what you know"],
-                answer: "Jagrat is skilled in HTML, CSS, JavaScript, React, Node.js, Laravel, Python, Git, MySQL & MongoDB."
+                keywords: ["skills", "what are your skills", "know what you know", "tech stack"],
+                answer: "Jagrat is skilled in HTML, CSS, JavaScript, React, Node.js, Laravel, Python, Git, MySQL & MongoDB. Let me show you the skills section.",
+                action: 'scrollTo',
+                target: '#skills'
             },
             {
-                keywords: ["project", "your projects", "what are your projects", "show projects", "tell me your work"],
-                answer: "Jagrat has worked on:<br>1️⃣ AI Chatbot for portfolio<br>2️⃣ This Portfolio Website!"
+                keywords: ["project", "your projects", "show projects", "tell me your work", "portfolio"],
+                answer: "Jagrat has worked on this Portfolio Website and the AI Chatbot you're talking to! I'll take you to his featured projects.",
+                action: 'scrollTo',
+                target: '#projects'
             },
             {
-                keywords: ["contact", "how to contact", "your contact", "email", "LinkedIn", "GitHub", "get in touch"],
+                keywords: ["contact", "how to contact", "email", "LinkedIn", "GitHub", "get in touch"],
                 answer: "You can send Jagrat a message using the form on this page. Let me take you there!",
-                action: 'scrollToContact'
+                action: 'scrollTo',
+                target: '#contact'
             },
             {
                 keywords: ["resume", "download resume", "cv", "your resume", "get resume", "show resume", "open resume"],
-                answer: "📄 <a href='JagratSati_Resume.pdf' download style='color:blue;'>Download Resume</a>"
+                answer: "Of course! You can download the resume right here: <a href='JagratSati_Resume.pdf' download style='color:blue;'>Download Resume</a>. I'll also scroll you to the resume section.",
+                action: 'scrollTo',
+                target: '#resume'
+            },
+             // --- NEW Rules for New Sections ---
+            {
+                keywords: ["services", "what services", "what can you do for me"],
+                answer: "Jagrat offers services in Web Development, AI Integration, Database Management, and Laravel Development. Scrolling you there now!",
+                action: 'scrollTo',
+                target: '#services'
             },
             {
-                keywords: ["hi", "hello", "hey", "namaste", "greetings", "good morning", "good evening"],
-                answer: "👋 Hello! I’m your assistant. Ask me anything about Jagrat's skills, projects, or contact info!"
+                keywords: ["blog", "articles", "writing", "do you write"],
+                answer: "Yes, Jagrat has a blog section where he shares insights on technology. Let me show you.",
+                action: 'scrollTo',
+                target: '#blog'
+            },
+            {
+                keywords: ["about", "tell me about jagrat"],
+                answer: "Jagrat is a passionate Full Stack Developer and AI enthusiast. I'll take you to his bio!",
+                action: 'scrollTo',
+                target: '#about'
+            },
+            {
+                keywords: ["hi", "hello", "hey", "namaste", "greetings"],
+                answer: "👋 Hello! I’m your assistant. Ask me about Jagrat's skills, projects, or use one of the prompts below!"
             },
             
-            // --- NEW DUMMY COMMANDS ---
+            // --- Existing Dummy Commands ---
             {
                 keywords: ["hire", "hiring", "available", "internship", "job", "work for you"],
                 answer: "Jagrat is actively seeking new opportunities! Please use the contact form to get in touch regarding potential projects or positions."
@@ -72,10 +98,16 @@ class JagratChatbot {
             },
             {
                 keywords: ["help", "need help", "can you help me", "assist me"],
-                answer: "Sure! Ask me about Jagrat's skills, projects, contact info, or resume."
+                answer: "Sure! Ask me about Jagrat's skills, projects, services, blog, contact info, or resume."
             }
         ];
         this.messageHistory = [];
+        this.conversationStarters = [
+            "What are your skills?",
+            "Show me your projects",
+            "What services do you offer?",
+            "How can I contact you?"
+        ];
         this.loadVoices();
         window.speechSynthesis.onvoiceschanged = () => this.loadVoices();
     }
@@ -90,11 +122,25 @@ class JagratChatbot {
         this.isOpen = !this.isOpen;
         windowEl.style.display = this.isOpen ? 'flex' : 'none';
         if (this.isOpen && this.messageHistory.length === 0) {
-            const welcomeMsg = "👋 Hi there! I'm Jagrat's virtual assistant. Ask me about skills, projects, contact, or resume.";
+            const welcomeMsg = "👋 Hi there! I'm Jagrat's virtual assistant. Ask me anything or use the prompts below.";
             this.appendMessage('bot', welcomeMsg);
-            this.messageHistory.push({sender: 'bot', text: welcomeMsg});
+            this.showConversationStarters();
         }
         this.loadHistory();
+    }
+
+    showConversationStarters() {
+        const historyContainer = document.getElementById('jagrat-chatbot-history');
+        historyContainer.innerHTML = '';
+        this.conversationStarters.forEach(item => {
+            const btn = document.createElement('button');
+            btn.textContent = item;
+            btn.onclick = () => {
+                document.getElementById('jagrat-chatbot-input').value = item;
+                this.sendMessage();
+            };
+            historyContainer.appendChild(btn);
+        });
     }
 
     appendMessage(sender, text) {
@@ -120,13 +166,15 @@ class JagratChatbot {
                 return rule; // Return the whole rule object
             }
         }
-        return { answer: "Sorry, I didn't understand that. Try asking about skills, projects, or contact!" };
+        return { answer: "Sorry, I didn't understand that. Try asking about skills, projects, or services!" };
     }
 
     sendMessage() {
         const input = document.getElementById('jagrat-chatbot-input');
         const msg = input.value.trim();
         if (!msg) return;
+
+        document.getElementById('jagrat-chatbot-history').innerHTML = ''; // Clear starters/history
         this.appendMessage('user', msg);
         input.value = '';
         this.showTyping();
@@ -136,8 +184,8 @@ class JagratChatbot {
             const reply = this.getBotReply(msg);
             this.appendMessage('bot', reply.answer);
 
-            if (reply.action === 'scrollToContact') {
-                document.getElementById('contact').scrollIntoView({
+            if (reply.action === 'scrollTo') {
+                document.querySelector(reply.target).scrollIntoView({
                     behavior: 'smooth',
                     block: 'center'
                 });
@@ -151,7 +199,7 @@ class JagratChatbot {
         const div = document.createElement('div');
         div.id = 'typing';
         div.className = 'chat-msg bot typing';
-        div.textContent = 'Typing...';
+        div.innerHTML = '<span></span><span></span><span></span>'; // Typing dots
         container.appendChild(div);
         container.scrollTop = container.scrollHeight;
     }
@@ -182,18 +230,22 @@ class JagratChatbot {
     }
 
     loadHistory() {
-        const historyContainer = document.getElementById('jagrat-chatbot-history');
-        const history = JSON.parse(localStorage.getItem('chatHistory')) || [];
-        historyContainer.innerHTML = '';
-        history.forEach(item => {
-            const btn = document.createElement('button');
-            btn.textContent = item;
-            btn.onclick = () => {
-                document.getElementById('jagrat-chatbot-input').value = item;
-                this.sendMessage();
-            };
-            historyContainer.appendChild(btn);
-        });
+        // This function now primarily shows conversation starters on open,
+        // but can be adapted to show recent questions if desired.
+        if (this.messageHistory.length > 0) {
+            const historyContainer = document.getElementById('jagrat-chatbot-history');
+            const history = JSON.parse(localStorage.getItem('chatHistory')) || [];
+            historyContainer.innerHTML = '';
+            history.forEach(item => {
+                const btn = document.createElement('button');
+                btn.textContent = item;
+                btn.onclick = () => {
+                    document.getElementById('jagrat-chatbot-input').value = item;
+                    this.sendMessage();
+                };
+                historyContainer.appendChild(btn);
+            });
+        }
     }
 
     initEventListeners() {
