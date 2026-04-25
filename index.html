@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,15 +6,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jagrat Sati | Personal Portfolio </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="preload" as="image" href="jagrit.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="jagrat-chatbot.css">
+   
 </head>
 
 <body>
-    <nav class ="navbar">
+    <nav class="navbar">
         <a href="#home" class="nav-logo">Jagrat Sati</a>
 
         <div class="nav-menu" id="nav-menu">
@@ -41,23 +46,26 @@
     </nav>
 
     <header id="home">
-        <div id="particles-js"></div> 
+        <div id="particles-js"></div>
 
-        <img src="jagrit.jpg" alt="Jagrat Sati" class="profile-img">
+        <img src="jagrit.png" alt="Jagrat Sati" class="profile-img">
         <h1 class="main-name">Jagrat Sati</h1>
-        <p class="designation"><strong>Web Developer | Software Developer Enthusiast</strong></p>
+        <p class="designation"><strong>Web Developer | Junior Full Stack Developer</strong></p>
     </header>
 
     <section class="section" id="about" data-aos="fade-up">
         <h2>About Me</h2>
         <p>
-            Hello! I'm <strong style="color: var(--accent); font-weight: 600;">Jagrat Sati</strong>, a passionate Full
-            Stack Developer and AI enthusiast pursuing a <strong style="color: var(--accent);">Bachelor of Computer
+            Hello! I'm <strong style="color: var(--accent); font-weight: 600;">Jagrat Sati</strong>, a passionate Web
+            Developer and Junior Full Stack Developer pursuing a <strong style="color: var(--accent);">Bachelor of
+                Computer
                 Applications (BCA)</strong> at <strong style="color: var(--accent);">Amrapali University</strong>. I
             specialize in building seamless, intelligent digital experiences from the ground up.
         </p>
         <p>
-            My goal is to merge robust backend functionality with intuitive, AI-powered user interfaces. I'm driven by a curiosity for what's possible and a desire to create applications that are not only functional but also a joy to use.
+            My goal is to merge robust backend functionality with intuitive, AI-powered user interfaces. I'm driven by a
+            curiosity for what's possible and a desire to create applications that are not only functional but also a
+            joy to use.
         </p>
         <p style="margin-top: 15px; font-size: 0.95rem; color: gray;">
             During the process of building my portfolio and chatbot, I used AI tools for assistance but also learned
@@ -84,7 +92,7 @@
                 <h3>Database Management</h3>
                 <p>Working with both SQL and NoSQL databases to manage data efficiently.</p>
             </div>
-             <div class="bento-item">
+            <div class="bento-item">
                 <i class="fab fa-laravel"></i>
                 <h3>Laravel Development</h3>
                 <p>Building robust web applications with the Laravel framework.</p>
@@ -95,21 +103,71 @@
     <section class="section" id="projects" data-aos="fade-up">
         <h2>Featured Projects</h2>
         <div class="bento-grid">
-            <div class="bento-item project-card">
-                <img src="images.png" alt="AI Chatbot Screenshot" class="project-img">
-                <h3>AI Portfolio Chatbot</h3>
-                <p class="project-description">An interactive chatbot integrated directly into this portfolio, built with custom JavaScript rules.</p>
+            
+                 <div class="bento-item project-card">
+                     <img src="devutilityhub.png" alt="Dev Utility Hub Screenshot" class="project-img">
+                     <h3>Dev Utility Hub</h3>
+                     <p class="project-description">A developer toolkit that includes JSON formatting, JWT decoding, Base64 encoding/decoding, and API testing tools in one clean interface.</p>
                 <div class="project-links">
-                    <a href="https://github.com/jagratsati45" target="_blank" class="github-btn">View on GitHub</a>
+                    <a href="https://dev-utility-hub-one.vercel.app/" target="_blank" class="live-demo-btn">Live Demo</a>
+                    <a href="https://github.com/jagratsati45/Dev-Utility-Hub" target="_blank"
+                        class="github-btn">View on GitHub</a>
+                </div>
+            </div>
+
+            <div class="bento-item project-card">
+                <img src="currencyconvert.png" alt="Currency Converter Screenshot" class="project-img">
+                <h3>Currency Converter</h3>
+                <p class="project-description">A simple yet effective currency converter app that provides real-time exchange rates and a seamless user experience.</p>
+                <div class="project-links">
+                    <a href="https://currency-converter045.netlify.app" target="_blank" class="live-demo-btn">Live Demo</a>
+                    <a href="https://github.com/jagratsati45/currency_converter-" target="_blank"
+                        class="github-btn">View on GitHub</a>
+                </div>
+            </div>
+
+            <div class="bento-item project-card">
+                <img src="tictactoe.png" alt="Tic Tac Toe Screenshot" class="project-img">
+                <h3>Tic Tac Toe</h3>
+                <p class="project-description">A classic Tic Tac Toe game with a modern UI and responsive design.</p>
+                <div class="project-links">
+                    <a href="https://tictactoe.netlify.app" target="_blank" class="live-demo-btn">Live Demo</a>
+                    <a href="https://github.com/jagratsati45/tic-tac-toe.git" target="_blank"
+                        class="github-btn">View on GitHub</a>
+                </div>
+            </div>
+
+            <div class="bento-item project-card">
+                <img src="taskflow.png" alt="task flow Screenshot" class="project-img">
+                <h3>TODO Application </h3>
+                <p class="project-description">TaskFlow is a modern, mobile-friendly task management app featuring gradient UI, due dates, swipe gestures, haptic feedback, and smooth animations for effortless daily productivity.</p>
+                <div class="project-links">
+                    <a href="https://todo-its.netlify.app" target="_blank" class="live-demo-btn">Live Demo</a>
+                    <a href="https://github.com/jagratsati45/my-daily-tasks.git" target="_blank"
+                        class="github-btn">View on GitHub</a>
                 </div>
             </div>
             <div class="bento-item project-card">
-                <img src="Portfolio-Desk.jpg" alt="Portfolio Website Screenshot" class="project-img">
+                <img src="STREAMFLIX.png" alt="STREAMFLIXMOV" class="project-img">
+                <h3>Netflix Clone </h3>
+                <p class="project-description">STREAMFLIX is clone website of Netflix having features like signup login, movie
+                    browsing, search functionality, and responsive design for an immersive streaming experience.
+                </p>
+                <div class="project-links">
+                    <a href="https://streamflixmov.netlify.app/" target="_blank" class="live-demo-btn">Live Demo</a>
+                    <a href="https://github.com/jagratsati45/streamflix.git" target="_blank"
+                        class="github-btn">View on GitHub</a>
+                </div>
+            </div>
+            <div class="bento-item project-card">
+                <img src="Portfolio-Desk.png" alt="Portfolio Website Screenshot" class="project-img">
                 <h3>Portfolio Website</h3>
-                <p class="project-description">This very site! Designed and developed to showcase my skills and act as my personal brand online.</p>
+                <p class="project-description">This very site! Designed and developed to showcase my skills and act as
+                    my personal brand online.</p>
                 <div class="project-links">
                     <a href="#" target="_blank" class="live-demo-btn">Live Demo</a>
-                    <a href="https://github.com/jagratsati45/My-Personal-Portfolio.git" target="_blank" class="github-btn">View on GitHub</a>
+                    <a href="https://github.com/jagratsati45/My-Personal-Portfolio.git" target="_blank"
+                        class="github-btn">View on GitHub</a>
                 </div>
             </div>
         </div>
@@ -121,12 +179,14 @@
             <div class="bento-item blog-post">
                 <h3>The Rise of AI in Web Development</h3>
                 <p>Exploring how artificial intelligence is reshaping the landscape of web development...</p>
-                <a href="https://dev.to/jagratsati45/more-than-a-buzzword-how-ai-is-reshaping-web-development-nll" class="read-more">Read More</a>
+                <a href="https://dev.to/jagratsati45/more-than-a-buzzword-how-ai-is-reshaping-web-development-nll"
+                    class="read-more">Read More</a>
             </div>
             <div class="bento-item blog-post">
                 <h3>A Deep Dive into Laravel</h3>
                 <p>A comprehensive guide to the Laravel framework and its powerful features...</p>
-                <a href="https://dev.to/jagratsati45/why-im-betting-on-laravel-a-deep-dive-for-aspiring-developers-21no" class="read-more">Read More</a>
+                <a href="https://dev.to/jagratsati45/why-im-betting-on-laravel-a-deep-dive-for-aspiring-developers-21no"
+                    class="read-more">Read More</a>
             </div>
         </div>
     </section>
@@ -159,8 +219,7 @@
         <h2>Certificates</h2>
         <div class="certficates">
             <div class="project-card">
-                <img src="ms.jpg"
-                    alt="Microsoft AI Skills Fest"
+                <img src="ms.jpg" alt="Microsoft AI Skills Fest"
                     style="max-width: 100%; height: 120px; object-fit: contain; margin-bottom: 10px;">
                 <h3> Microsoft AI -(Artificial Intelligence) Skills Fest Participation </h3>
                 <a href="Microsoft AI Skills Fest.pdf" download class="certificate-download-btn">Download</a>
@@ -178,6 +237,12 @@
                     style="max-width: 80%; height: 120px; object-fit: contain; margin-bottom: 10px;">
                 <h3>Internship at Varenyam Pvt Ltd</h3>
                 <a href="Internship_Certificate.pdf" download class="certificate-download-btn">Download</a>
+            </div>
+            <div class="project-card">
+                <img src="https://play-lh.googleusercontent.com/uphrWz_e_K_pZrPOmCR34A6grxPtva0kM8bhMSgdycrlxiBC7C_JzGtyJLn1mfrRLrg" alt="Introducton to Frontend Development"
+                    style="max-width: 100%; height: 120px; object-fit: contain; margin-bottom: 10px;">
+                <h3> Introducton to Frontend Development  </h3>
+                <a href="Simplilearn Certificate.pdf" download class="certificate-download-btn">Download</a>
             </div>
             <div class="project-card">
                 <img src="https://cdn-assets.theforage.com/images/forage-schema-logo.png" alt="Certificate 3"
@@ -198,9 +263,9 @@
         <h2>Skills</h2>
         <ul>
             <li><i class="fa-brands fa-html5"></i> HTML, CSS, JavaScript</li>
-            <li><i class="fa-brands fa-react"></i> React.js, Node.js</li>
-            <li><i class="fa-solid fa-code"></i> PHP, Laravel, Java</li>
-            <li><i class="fa-brands fa-python"></i> Python, C++ (Object Oriented programming System)</li>
+            <li><i class="fa-brands fa-react"></i> React.js</li>
+            <li><i class="fa-solid fa-code"></i> PHP, Node.js</li>
+            <li><i class="fa-brands fa-python"></i> Python(Basic), C++ & Java(Object Oriented programming System)</li>
             <li><i class="fa-solid fa-database"></i> MySQL</li>
         </ul>
     </section>
@@ -234,52 +299,23 @@
     <footer>
         <p>&copy; 2025 Jagrat Sati. All rights reserved.</p>
         <div class="footer-social">
-            <a href="https://linkedin.com/in/jagratsati" target="_blank" aria-label="LinkedIn"><i
+            <a href="https://linkedin.com/in/jagratsati045" target="_blank" aria-label="LinkedIn"><i
                     class="fab fa-linkedin"></i></a>
             <a href="https://github.com/jagratsati45" target="_blank" aria-label="GitHub"><i
                     class="fab fa-github"></i></a>
         </div>
     </footer>
 
-    <button id="jagrat-chatbot-toggle" aria-label="Toggle Chatbot">
-        <i class="fas fa-robot"></i>
-    </button>
-    <div id="jagrat-chatbot-window">
-        <div id="jagrat-chatbot-header">
-            <div class="jagrat-chatbot-title">
-                <i class="fas fa-robot"></i>
-                <span>Jagrat Chatbot</span>
-            </div>
-            <div class="jagrat-chatbot-header-controls">
-                <button id="jagrat-chatbot-speech-toggle" class="jagrat-chatbot-voice-btn" aria-label="Toggle Speech">
-                    <i class="fas fa-volume-up"></i>
-                </button>
-                <button id="jagrat-chatbot-close-btn" class="jagrat-chatbot-close-btn" aria-label="Close Chatbot">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        </div>
-        <div id="jagrat-chatbot-messages"></div>
-        <div id="jagrat-chatbot-history"></div>
-        <div id="jagrat-chatbot-input-area">
-            <input type="text" id="jagrat-chatbot-input" placeholder="Type your message...">
-            <button id="jagrat-chatbot-mic-btn" class="jagrat-chatbot-voice-btn" aria-label="Voice Input">
-                <i class="fas fa-microphone"></i>
-            </button>
-            <button id="jagrat-chatbot-send-btn" aria-label="Send Message">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
 
     <a href="#home" id="back-to-top-btn" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
-    
-    <script src="jagrat-chatbot.js"></script>
+
+  
     <script src="script.js"></script>
+
 </body>
 
 </html>
