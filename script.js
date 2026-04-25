@@ -1,20 +1,21 @@
-// --- NEW: tsParticles Initialization ---
+
 document.addEventListener('DOMContentLoaded', () => {
+    const isMobile = window.innerWidth < 768;
     tsParticles.load("particles-js", {
         background: {
             color: {
-                value: "#1a1d26" // Match your dark mode bg or a dark color
+                value: "#1a1d26"
             }
         },
-        fpsLimit: 60,
+        fpsLimit: isMobile ? 30 : 60,
         interactivity: {
             events: {
                 onHover: {
-                    enable: true,
+                    enable: !isMobile,
                     mode: "repulse"
                 },
                 onClick: {
-                    enable: true,
+                    enable: !isMobile,
                     mode: "push"
                 },
                 resize: true
@@ -35,13 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             links: {
                 color: "#ffffff",
-                distance: 150,
+                distance: isMobile ? 100 : 150,
                 enable: true,
-                opacity: 0.2,
+                opacity: isMobile ? 0.12 : 0.2,
                 width: 1
             },
             collisions: {
-                enable: true
+                enable: !isMobile
             },
             move: {
                 direction: "none",
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     default: "bounce"
                 },
                 random: false,
-                speed: 1,
+                speed: isMobile ? 0.4 : 1,
                 straight: false
             },
             number: {
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     enable: true,
                     area: 800
                 },
-                value: 80
+                value: isMobile ? 20 : 80
             },
             opacity: {
                 value: 0.2
@@ -67,16 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 type: "circle"
             },
             size: {
-                value: { min: 1, max: 5 },
+                value: { min: 1, max: isMobile ? 3 : 5 },
             }
         },
         detectRetina: true
     });
 });
-AOS.init();
+AOS.init({ once: true, duration: 500, easing: 'ease-out', disable: window.innerWidth < 768 });
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Mobile Hamburger Menu ---
+
     const hamburger = document.getElementById('hamburger-button');
     const navMenu = document.getElementById('nav-menu');
 
@@ -85,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.toggle('is-active');
             document.body.classList.toggle('menu-open'); // <-- THIS LINE IS THE KEY CHANGE
 
-            // Change hamburger icon to close icon (X) and back
+
             const icon = hamburger.querySelector('i');
             if (icon.classList.contains('fa-bars')) {
                 icon.classList.remove('fa-bars');
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Close menu when a link is clicked
+
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('is-active');
@@ -107,54 +108,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Theme Toggle Functionality ---
+
     const themeToggleButton = document.getElementById('theme-toggle-button');
     if (themeToggleButton) {
         themeToggleButton.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
         });
     }
-    
-    // --- Back to Top Button Functionality ---
+
+    // --- Throttled scroll handlers using rAF for 60fps scrolling ---
+    let scrollTicking = false;
     const backToTopBtn = document.getElementById('back-to-top-btn');
-    if(backToTopBtn) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
+    let lastScrollY = window.scrollY;
+    const navbar = document.querySelector('.navbar');
+
+    function onScrollUpdate() {
+        const currentScrollY = window.scrollY;
+
+        // Back-to-top button visibility
+        if (backToTopBtn) {
+            if (currentScrollY > 300) {
                 backToTopBtn.classList.add('visible');
             } else {
                 backToTopBtn.classList.remove('visible');
             }
-        });
-    }
+        }
 
-    // --- Navbar Hide/Show on Scroll ---
-    let lastScrollY = window.scrollY;
-    const navbar = document.querySelector('.navbar');
-
-    if (navbar) {
-        window.addEventListener('scroll', () => {
-            if (lastScrollY < window.scrollY && window.scrollY > 100) {
-                // User is scrolling down and past the header
+        // Navbar auto-hide on scroll down
+        if (navbar) {
+            if (lastScrollY < currentScrollY && currentScrollY > 100) {
                 navbar.classList.add('navbar-hidden');
             } else {
-                // User is scrolling up or is near the top of the page
                 navbar.classList.remove('navbar-hidden');
             }
-            lastScrollY = window.scrollY;
-        });
+        }
+
+        lastScrollY = currentScrollY;
+        scrollTicking = false;
     }
 
-    // --- Chatbot Initialization ---
-    try {
-        if (typeof JagratChatbot !== 'undefined') {
-            const chatbot = new JagratChatbot();
-            if (typeof chatbot.initEventListeners === 'function') {
-                chatbot.initEventListeners();
-            }
-        } else {
-            console.error("JagratChatbot class not found.");
+    window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            requestAnimationFrame(onScrollUpdate);
+            scrollTicking = true;
         }
-    } catch (e) {
-        console.error("Could not initialize chatbot:", e);
-    }
+    }, { passive: true });
+
 });
