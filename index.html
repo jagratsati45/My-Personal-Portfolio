@@ -10,11 +10,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <link rel="preload" as="image" href="jagrit.jpg">
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Chatbot upcoming edits/jagrat-chatbot.css">
    
 </head>
 
@@ -31,7 +32,7 @@
                 <a href="#contact">Contact</a>
             </div>
             <div class="nav-right">
-                <a href="Jagrat Sati.pdf" download><i class="fas fa-download"></i> Download My Resume</a>
+                <a href="Jagrat_Sati_Resume.pdf" download><i class="fas fa-download"></i> Download My Resume</a>
             </div>
         </div>
 
@@ -117,6 +118,29 @@
             </div>
 
             <div class="bento-item project-card">
+                <img src="weather-view.png" alt="Weather View App Screenshot" class="project-img">
+                <h3>Weather View</h3>
+                <p class="project-description">A clean weather application that fetches real-time weather data using API, displaying temperature, humidity, wind speed, and forecasts with a modern UI.</p>
+                <div class="project-links">
+                    <a href="https://weather-view-js.netlify.app/" target="_blank" class="live-demo-btn">Live Demo</a>
+                    <a href="https://github.com/jagratsati45/Weather-App" target="_blank"
+                        class="github-btn">View on GitHub</a>
+                </div>
+            </div>
+
+            <div class="bento-item project-card">
+                <img src="Portfolio-Desk.png" alt="Portfolio Website Screenshot" class="project-img">
+                <h3>Portfolio Website</h3>
+                <p class="project-description">This very site! Designed and developed to showcase my skills and act as
+                    my personal brand online.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank" class="live-demo-btn">Live Demo</a>
+                    <a href="https://github.com/jagratsati45/My-Personal-Portfolio.git" target="_blank"
+                        class="github-btn">View on GitHub</a>
+                </div>
+            </div>
+
+            <div class="bento-item project-card">
                 <img src="currencyconvert.png" alt="Currency Converter Screenshot" class="project-img">
                 <h3>Currency Converter</h3>
                 <p class="project-description">A simple yet effective currency converter app that provides real-time exchange rates and a seamless user experience.</p>
@@ -130,7 +154,7 @@
             <div class="bento-item project-card">
                 <img src="tictactoe.png" alt="Tic Tac Toe Screenshot" class="project-img">
                 <h3>Tic Tac Toe</h3>
-                <p class="project-description">A classic Tic Tac Toe game with a modern UI and responsive design.</p>
+                <p class="project-description">A classic Tic Tac Toe game with a modern UI, smooth animations, win detection logic, and fully responsive design for both desktop and mobile play.</p>
                 <div class="project-links">
                     <a href="https://tictactoe.netlify.app" target="_blank" class="live-demo-btn">Live Demo</a>
                     <a href="https://github.com/jagratsati45/tic-tac-toe.git" target="_blank"
@@ -148,6 +172,7 @@
                         class="github-btn">View on GitHub</a>
                 </div>
             </div>
+
             <div class="bento-item project-card">
                 <img src="STREAMFLIX.png" alt="STREAMFLIXMOV" class="project-img">
                 <h3>Netflix Clone </h3>
@@ -157,17 +182,6 @@
                 <div class="project-links">
                     <a href="https://streamflixmov.netlify.app/" target="_blank" class="live-demo-btn">Live Demo</a>
                     <a href="https://github.com/jagratsati45/streamflix.git" target="_blank"
-                        class="github-btn">View on GitHub</a>
-                </div>
-            </div>
-            <div class="bento-item project-card">
-                <img src="Portfolio-Desk.png" alt="Portfolio Website Screenshot" class="project-img">
-                <h3>Portfolio Website</h3>
-                <p class="project-description">This very site! Designed and developed to showcase my skills and act as
-                    my personal brand online.</p>
-                <div class="project-links">
-                    <a href="#" target="_blank" class="live-demo-btn">Live Demo</a>
-                    <a href="https://github.com/jagratsati45/My-Personal-Portfolio.git" target="_blank"
                         class="github-btn">View on GitHub</a>
                 </div>
             </div>
@@ -274,7 +288,7 @@
     <section class="section resume-button" id="resume" data-aos="fade-up">
         <h2 class="section-title">Resume</h2>
         <div class="resume-button-wrapper">
-            <a href="Jagrat Sati.pdf" target="_blank"> Click Here To download</a>
+            <a href="Jagrat_Sati_Resume.pdf" target="_blank"> Click Here To download</a>
         </div>
     </section>
 
@@ -310,12 +324,48 @@
 
     <a href="#home" id="back-to-top-btn" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
 
+    <!-- AI Chatbot -->
+    <div id="jagrat-chatbot-wrapper" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2147483647;">
+        <button id="jagrat-chatbot-toggle" aria-label="Open AI Assistant" style="position:absolute;bottom:24px;right:24px;z-index:2147483647;display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;border:none;background:linear-gradient(135deg,#0077ff,#6c63ff);color:white;font-size:22px;cursor:pointer;box-shadow:0 4px 20px rgba(108,99,255,0.4);pointer-events:auto;">
+            <i class="fas fa-robot"></i>
+        </button>
+    </div>
+
+    <div id="jagrat-chatbot-window" role="dialog" aria-label="AI Chat Assistant">
+        <div id="jagrat-chatbot-header">
+            <div class="chatbot-header-left">
+                <span class="status-dot"></span>
+                <span>Jagrat's AI Assistant</span>
+            </div>
+            <div class="header-actions">
+                <button id="jagrat-chatbot-speech-toggle" aria-label="Toggle speech">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+                <button id="jagrat-chatbot-close-btn" aria-label="Close chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div id="jagrat-chatbot-messages"></div>
+        <div id="jagrat-chatbot-history"></div>
+        <div id="jagrat-chatbot-input-area">
+            <input type="text" id="jagrat-chatbot-input" placeholder="Ask me anything about Jagrat..." autocomplete="off">
+            <button id="jagrat-chatbot-mic-btn" aria-label="Voice input">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button id="jagrat-chatbot-send-btn" aria-label="Send message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
   
     <script src="script.js"></script>
+    <script src="Chatbot upcoming edits/jagrat-chatbot.js"></script>
 
 </body>
 

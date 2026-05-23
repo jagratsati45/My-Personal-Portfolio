@@ -1,137 +1,599 @@
+/* ============================================
+   JAGRAT CHATBOT - Enhanced & Fully Responsive
+   ============================================ */
+
+/* Toggle Button */
 #jagrat-chatbot-toggle {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--accent);
+    bottom: 24px;
+    right: 24px;
+    left: auto;
+    background: linear-gradient(135deg, var(--accent, #6c63ff), #6c63ff);
     color: white;
-    font-size: 24px;
-    padding: 14px 18px;
+    font-size: 22px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
+    border: none;
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
-    z-index: 999;
-    transition: transform 0.3s;
+    box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+    z-index: 2147483647;
+    transition: box-shadow 0.3s, left 0.35s cubic-bezier(0.4, 0, 0.2, 1), right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
 }
 
 #jagrat-chatbot-toggle:hover {
-    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(108, 99, 255, 0.6);
 }
 
+#jagrat-chatbot-toggle:active {
+    box-shadow: 0 2px 10px rgba(108, 99, 255, 0.4);
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4); }
+    50% { box-shadow: 0 4px 30px rgba(108, 99, 255, 0.7); }
+}
+
+/* Chat Window */
 #jagrat-chatbot-window {
     position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 320px;
-    max-height: 500px;
-    background: var(--card-bg);
-    color: var(--text-color);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    bottom: 90px;
+    right: 24px;
+    width: 370px;
+    height: 520px;
+    max-height: calc(100vh - 120px);
+    background: var(--card-bg, #ffffff);
+    color: var(--text-color, #333);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     display: none;
     flex-direction: column;
     overflow: hidden;
-    z-index: 9999;
+    z-index: 2147483646;
     font-family: 'Poppins', sans-serif;
+    contain: layout;
 }
 
+#jagrat-chatbot-window.chatbot-open {
+    display: flex !important;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
 #jagrat-chatbot-header {
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--accent, #6c63ff), #6c63ff);
     color: white;
-    padding: 10px;
-    font-weight: bold;
+    padding: 14px 16px;
+    font-weight: 600;
+    font-size: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
 }
 
+#jagrat-chatbot-header .chatbot-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#jagrat-chatbot-header .chatbot-header-left .status-dot {
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+    flex-shrink: 0;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+#jagrat-chatbot-header .header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Messages Area */
 #jagrat-chatbot-messages {
-    padding: 10px;
+    padding: 14px;
     flex: 1;
     overflow-y: auto;
-    font-size: 14px;
-    background-color: var(--bg-color);
+    overflow-x: hidden;
+    font-size: 13px;
+    background-color: var(--bg-color, #f8f9fa);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
 }
 
+#jagrat-chatbot-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+#jagrat-chatbot-messages::-webkit-scrollbar-thumb {
+    background: var(--accent, #6c63ff);
+    border-radius: 4px;
+}
+
+/* Chat Messages */
+.chat-msg {
+    margin: 0;
+    line-height: 1.5;
+    padding: 10px 14px;
+    border-radius: 12px;
+    max-width: 85%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 13px;
+}
+
+.chat-msg.user {
+    background: linear-gradient(135deg, var(--accent, #6c63ff), #6c63ff);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+.chat-msg.bot {
+    background: var(--card-bg, #ffffff);
+    color: var(--text-color, #333);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    border: 1px solid rgba(108, 99, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.chat-msg.bot a {
+    color: var(--accent, #6c63ff);
+    text-decoration: underline;
+    word-break: break-all;
+}
+
+/* Typing Indicator */
+.chat-msg.typing {
+    display: flex;
+    gap: 5px;
+    padding: 14px 18px;
+    background: var(--card-bg, #ffffff);
+    border: 1px solid rgba(108, 99, 255, 0.1);
+    align-self: flex-start;
+    border-radius: 12px;
+    border-bottom-left-radius: 4px;
+}
+
+.chat-msg.typing span {
+    width: 8px;
+    height: 8px;
+    background: var(--accent, #6c63ff);
+    border-radius: 50%;
+    display: inline-block;
+    animation: typingBounce 1.4s infinite;
+}
+
+.chat-msg.typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-msg.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* Quick Reply Buttons (Suggestions) */
 #jagrat-chatbot-history {
-    padding: 0 10px 5px;
+    padding: 8px 14px 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 6px;
+    background: var(--bg-color, #f8f9fa);
+    flex-shrink: 0;
+    max-height: 80px;
+    overflow-y: auto;
+}
+
+#jagrat-chatbot-history:empty {
+    display: none;
+    padding: 0;
 }
 
 #jagrat-chatbot-history button {
-    background: var(--card-bg);
-    border: 1px solid var(--accent);
-    color: var(--text-color);
-    padding: 3px 8px;
+    background: transparent;
+    border: 1.5px solid var(--accent, #6c63ff);
+    color: var(--accent, #6c63ff);
+    padding: 5px 12px;
     font-size: 11px;
-    border-radius: 10px;
+    font-weight: 500;
+    border-radius: 20px;
     cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Poppins', sans-serif;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
 }
 
+#jagrat-chatbot-history button:hover {
+    background: var(--accent, #6c63ff);
+    color: white;
+    transform: translateY(-1px);
+}
+
+#jagrat-chatbot-history button:active {
+    transform: scale(0.95);
+}
+
+/* Input Area */
 #jagrat-chatbot-input-area {
     display: flex;
-    border-top: 1px solid var(--accent);
+    align-items: center;
+    border-top: 1px solid rgba(108, 99, 255, 0.15);
+    background: var(--card-bg, #ffffff);
+    flex-shrink: 0;
+    padding: 4px 0;
 }
 
 #jagrat-chatbot-input {
     flex-grow: 1;
     border: none;
-    padding: 12px;
-    font-size: 14px;
+    padding: 12px 14px;
+    font-size: 13px;
     outline: none;
-    background: var(--card-bg);
-    color: var(--text-color);
+    background: transparent;
+    color: var(--text-color, #333);
+    font-family: 'Poppins', sans-serif;
+    min-width: 0;
 }
 
-.jagrat-chatbot-voice-btn, #jagrat-chatbot-send-btn, #jagrat-chatbot-close-btn {
+#jagrat-chatbot-input::placeholder {
+    color: #999;
+    font-size: 12px;
+}
+
+/* Buttons in input area */
+#jagrat-chatbot-send-btn,
+#jagrat-chatbot-speech-toggle,
+#jagrat-chatbot-mic-btn {
     background: none;
     border: none;
-    font-size: 18px;
-    padding: 0 12px;
+    font-size: 16px;
+    padding: 8px 10px;
     cursor: pointer;
-    color: var(--text-color);
-    transition: color 0.2s;
+    color: var(--text-color, #666);
+    transition: color 0.2s, transform 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
 }
 
 #jagrat-chatbot-send-btn:hover {
-    color: var(--accent);
+    color: var(--accent, #6c63ff);
+    transform: scale(1.15);
 }
 
-.jagrat-chatbot-voice-btn.listening {
-    color: red;
+#jagrat-chatbot-send-btn:active {
+    transform: scale(0.9);
 }
 
-.chat-msg {
-    margin: 6px 0;
-    line-height: 1.4;
-    padding: 5px 10px;
-    border-radius: 8px;
-    max-width: 80%;
-    word-wrap: break-word;
+#jagrat-chatbot-mic-btn.listening {
+    color: #ef4444;
+    animation: pulse-mic 1s infinite;
 }
 
-.chat-msg.user {
-    background: var(--accent);
+@keyframes pulse-mic {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Header buttons */
+#jagrat-chatbot-close-btn {
+    background: none;
+    border: none;
+    font-size: 14px;
     color: white;
-    align-self: flex-end;
+    opacity: 0.8;
+    padding: 4px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 0.2s;
 }
 
-.chat-msg.bot {
-    background: #eeeeee;
-    color: #333;
-    align-self: flex-start;
+#jagrat-chatbot-close-btn:hover {
+    opacity: 1;
 }
 
-.typing {
-    font-style: italic;
-    color: gray;
+#jagrat-chatbot-speech-toggle {
+    color: white;
+    opacity: 0.8;
+    font-size: 14px;
+    padding: 4px;
 }
 
+#jagrat-chatbot-speech-toggle:hover {
+    opacity: 1;
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+    #jagrat-chatbot-toggle {
+        bottom: 20px;
+        right: 20px;
+        width: 52px;
+        height: 52px;
+        font-size: 20px;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    #jagrat-chatbot-window {
+        width: calc(100% - 24px);
+        right: 12px;
+        bottom: 82px;
+        height: calc(100vh - 110px);
+        max-height: 480px;
+        border-radius: 14px;
+    }
+
+    .chat-msg {
+        max-width: 88%;
+        font-size: 13px;
+    }
+
+    #jagrat-chatbot-history button {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+}
+
+/* Small phones (480px and below) */
+@media (max-width: 480px) {
+    #jagrat-chatbot-toggle {
+        bottom: 16px;
+        right: 16px;
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+        display: flex !important;
+        visibility: visible !important;
+    }
+
+    #jagrat-chatbot-window {
+        width: calc(100% - 16px);
+        right: 8px;
+        left: 8px;
+        bottom: 76px;
+        height: calc(100vh - 90px);
+        max-height: 440px;
+        border-radius: 12px;
+    }
+
+    #jagrat-chatbot-header {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+
+    #jagrat-chatbot-messages {
+        padding: 10px;
+        gap: 6px;
+    }
+
+    .chat-msg {
+        max-width: 90%;
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    #jagrat-chatbot-input {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    #jagrat-chatbot-history {
+        padding: 6px 10px 8px;
+        gap: 5px;
+    }
+
+    #jagrat-chatbot-history button {
+        font-size: 10px;
+        padding: 4px 9px;
+    }
+
+    #jagrat-chatbot-send-btn,
+    #jagrat-chatbot-mic-btn {
+        padding: 8px;
+        font-size: 15px;
+    }
+}
+
+/* Very small screens (360px and below) */
+@media (max-width: 360px) {
+    #jagrat-chatbot-toggle {
+        bottom: 12px;
+        right: 12px;
+        width: 46px;
+        height: 46px;
+        font-size: 17px;
+        display: flex !important;
+        visibility: visible !important;
+    }
+
+    #jagrat-chatbot-window {
+        width: 100%;
+        right: 0;
+        left: 0;
+        bottom: 68px;
+        height: calc(100vh - 76px);
+        max-height: none;
+        border-radius: 12px 12px 0 0;
+    }
+}
+
+/* Landscape mode on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    #jagrat-chatbot-window {
+        bottom: 10px;
+        height: calc(100vh - 20px);
+        max-height: none;
+    }
+
+    #jagrat-chatbot-toggle {
+        bottom: 10px;
+        right: 10px;
+        width: 44px;
+        height: 44px;
+    }
+
+    #jagrat-chatbot-messages {
+        min-height: 120px;
+    }
+}
+
+/* Large screens (1200px+) */
+@media (min-width: 1200px) {
+    #jagrat-chatbot-window {
+        width: 400px;
+        height: 560px;
+    }
+}
+
+/* ============================================
+   DARK MODE SUPPORT
+   ============================================ */
+[data-theme="dark"] #jagrat-chatbot-window {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .chat-msg.bot {
+    background: rgba(108, 99, 255, 0.08);
+    border-color: rgba(108, 99, 255, 0.2);
+}
+
+[data-theme="dark"] #jagrat-chatbot-history button {
+    border-color: rgba(108, 99, 255, 0.5);
+    color: rgba(108, 99, 255, 0.9);
+}
+
+[data-theme="dark"] #jagrat-chatbot-history button:hover {
+    background: var(--accent, #6c63ff);
+    color: white;
+}
+
+[data-theme="dark"] #jagrat-chatbot-input::placeholder {
+    color: #777;
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    #jagrat-chatbot-toggle {
+        animation: none;
+    }
+
+    #jagrat-chatbot-window {
+        animation: none;
+    }
+
+    .chat-msg.typing span {
+        animation: none;
+        opacity: 0.6;
+    }
+
+    .status-dot {
+        animation: none;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+#jagrat-chatbot-toggle:focus-visible,
+#jagrat-chatbot-send-btn:focus-visible,
+#jagrat-chatbot-mic-btn:focus-visible,
+#jagrat-chatbot-close-btn:focus-visible,
+#jagrat-chatbot-speech-toggle:focus-visible,
+#jagrat-chatbot-input:focus-visible {
+    outline: 2px solid var(--accent, #6c63ff);
+    outline-offset: 2px;
+}
+
+#jagrat-chatbot-history button:focus-visible {
+    outline: 2px solid var(--accent, #6c63ff);
+    outline-offset: 1px;
+}
+
+/* ============================================
+   MOBILE-SPECIFIC FIXES
+   ============================================ */
+
+/* Ensure chatbot shows above mobile nav menu overlay */
+body.menu-open #jagrat-chatbot-window {
+    z-index: 2147483646;
+}
+
+/* iOS Safari: prevent input zoom on focus */
+@supports (-webkit-touch-callout: none) {
+    #jagrat-chatbot-input {
+        font-size: 16px;
+    }
+}
+
+/* Fix for iOS Safari viewport height with keyboard */
 @media (max-width: 768px) {
     #jagrat-chatbot-window {
-        width: 90%;
-        bottom: 60px;
-        right: 5%;
+        max-height: calc(100dvh - 110px);
+    }
+}
+
+/* Ensure toggle button never gets hidden by parent overflow */
+#jagrat-chatbot-toggle,
+#jagrat-chatbot-window {
+    will-change: auto;
+    isolation: isolate;
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    #jagrat-chatbot-toggle {
+        width: 54px;
+        height: 54px;
+    }
+
+    #jagrat-chatbot-toggle:hover {
+        transform: none;
+    }
+
+    #jagrat-chatbot-history button {
+        padding: 7px 12px;
+        min-height: 32px;
+    }
+
+    #jagrat-chatbot-send-btn,
+    #jagrat-chatbot-mic-btn {
+        min-width: 40px;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #jagrat-chatbot-input-area {
+        min-height: 48px;
     }
 }
