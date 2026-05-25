@@ -860,7 +860,7 @@ RULES:
     }
 
     async callGeminiAPI(userMessage) {
-        const API_KEY = 'AIzaSyBibIV7OXu48BlY8P7O7o1jxhP7d8psxZY';
+        const API_KEY = 'API_KEY';
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`;
 
         // Build conversation history for context (last 6 messages)
